@@ -21,10 +21,11 @@ public class ClientPointsApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initDB(ClientRepository clientRepository, TransactionRepository transactionRepository){
+	public CommandLineRunner insertSampleDataToDB(ClientRepository clientRepository, TransactionRepository transactionRepository){
 		return args -> {
 			List<Client> clients = Arrays.asList(new Client("Ben", "Gates"), new Client("Joe", "Perry"), new Client("Jim", "Smith"), new Client("Benjamin", "Franklin"));
 			clients.forEach(clientRepository::save);
+			System.out.println(clientRepository.findAll());
 			transactionRepository.save(new Transaction(clients.get(0), LocalDate.of(2022, 1, 30), 100));
 			transactionRepository.save(new Transaction(clients.get(0), LocalDate.of(2022, 2, 20), 130));
 			transactionRepository.save(new Transaction(clients.get(0), LocalDate.of(2022, 3, 15), 70));

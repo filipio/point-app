@@ -18,8 +18,23 @@ public class Transaction {
     public Transaction() {
     }
 
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "transactionId=" + transactionId +
+                ", client=" + client +
+                ", transactionDate=" + transactionDate +
+                ", price=" + price +
+                '}';
+    }
+
     public Transaction(Client client, LocalDate transactionDate, float price) {
         this.client = client;
+        this.transactionDate = transactionDate;
+        this.price = price;
+    }
+
+    public Transaction(LocalDate transactionDate, float price) {
         this.transactionDate = transactionDate;
         this.price = price;
     }

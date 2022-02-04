@@ -4,8 +4,6 @@ import com.example.clientPoints.model.Client;
 import com.example.clientPoints.model.Transaction;
 import com.example.clientPoints.repository.ClientRepository;
 import com.example.clientPoints.repository.TransactionRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +12,6 @@ import java.util.List;
 
 @Service
 public class PointService {
-
-    private static final Logger logger = LoggerFactory.getLogger(PointService.class);
 
     private final static int SECOND_THRESHOLD = 100;
     private final static int SECOND_THRESHOLD_MULTIPLIER = 2;
@@ -34,8 +30,6 @@ public class PointService {
     public Integer getPointsForClient(Long clientId, int year, int month) {
         LocalDate startPeriod = LocalDate.of(year, month, 1);
         LocalDate endPeriod = LocalDate.of(year, month, startPeriod.lengthOfMonth());
-        logger.debug("{} = {}", startPeriod, endPeriod);
-        System.out.println(String.format("%s - %s", startPeriod, endPeriod));
         Client client = clientRepository.getById(clientId);
         List<Transaction> transactions = transactionRepository.findByClientAndTransactionDateBetween(client, startPeriod, endPeriod);
         return getPoints(transactions);

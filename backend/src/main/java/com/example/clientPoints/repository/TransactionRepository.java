@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
     List<Transaction> findByClientAndTransactionDateBetween(Client client, LocalDate start, LocalDate end);
+
     List<Transaction> findByClient(Client client);
 }
